@@ -9,8 +9,17 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
+    - name: Run Dockerfile
+      run: |
+        docker build -t jsamm21/terraformflaskapp .
+        docker login -u "jsamm21" -p "Ascent2021" docker.io
+        docker image push jsamm21/terraformflaskapp:latest
+
+    - name: Provision EC2 Istance with Terraform
+      run: |
+        terraform init
+        terraform plan
+        terraform apply --auto-approve
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
