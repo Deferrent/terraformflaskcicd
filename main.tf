@@ -1,5 +1,5 @@
 variable "AWS_ACCESS_KEY_ID" {
-  type = "string"
+  type = string
 }
 
 terraform {
