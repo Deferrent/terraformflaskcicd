@@ -1,6 +1,12 @@
 name: Provision t3.micro EC2
-on: [push]
-
+on:
+  workflow_dispatch:
+    inputs:
+      ec2-name:
+        description: EC2 name
+        required: true
+        default: 'App Server'
+        type: string
 jobs:
   provision-ec2:
     runs-on: ubuntu-latest
