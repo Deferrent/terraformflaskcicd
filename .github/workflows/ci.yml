@@ -1,25 +1,27 @@
-name: CI
-on: [push]
-
+name: Provision t3.micro EC2
+on:
+  workflow_dispatch:
+    inputs:
+      ec2-name:
+        description: EC2 name
+        required: true
+        default: 'App Server'
+        type: string
 jobs:
-  build:
-
+  provision-ec2:
     runs-on: ubuntu-latest
-    
     steps:
-    
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '14'
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
           aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
-          aws-region: us-west-1
-    
-    - name: Setup Terraform
+          aws-region: us-east-2
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
@@ -33,20 +35,3 @@ jobs:
           terraform validate
           terraform plan 
           terraform apply -auto-approve
-
-      
-    - name: Run Dockerfile
-      run: |
-        docker build -t jsamm21/terraformflaskapp .
-        docker login -u "jsamm21" -p "Ascent2021" docker.io
-        docker image push jsamm21/terraformflaskapp:latest
-
-    - name: Provision EC2 Istance with Terraform
-      run: |
-        terraform init
-        terraform plan
-        terraform apply --auto-approve
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
