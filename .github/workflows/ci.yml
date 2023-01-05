@@ -13,8 +13,8 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
-        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::827873213078:user/jsamm
+        aws-region: us-west-1
       
     - name: Run Dockerfile
       run: |
