@@ -1,7 +1,4 @@
-variable "AWS_ACCESS_KEY_ID" {
-  type = string
-}
-
+variable "AWS_ACCESS_KEY_ID" {}
 terraform {
   required_providers {
     aws = {
