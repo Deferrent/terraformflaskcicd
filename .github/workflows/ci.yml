@@ -13,7 +13,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::827873213078:user/jsamm
+        role-to-assume: arn:aws:iam::827873213078:role/MyEC2Role
         aws-region: us-west-1
       
     - name: Run Dockerfile
