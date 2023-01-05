@@ -8,8 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1
+     - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::827873213078:user/jsamm
+        aws-region: us-west-1
+
+    
     - name: Run Dockerfile
+      uses: actions/checkout@v1
       run: |
         docker build -t jsamm21/terraformflaskapp .
         docker login -u "jsamm21" -p "Ascent2021" docker.io
