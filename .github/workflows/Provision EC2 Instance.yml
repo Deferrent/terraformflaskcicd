@@ -34,15 +34,6 @@ jobs:
         id:   apply
         env:
           TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
-        run: |
-          cd .
-          terraform init
-          terraform validate
-          terraform plan 
-          terraform apply -auto-approve
-      - name: Terraform Create S3
-        id:   apply
-        env:
           TF_VAR_s3_name:  "${{ github.event.inputs.s3-name }}"
         run: |
           cd .
@@ -50,5 +41,4 @@ jobs:
           terraform validate
           terraform plan 
           terraform apply -auto-approve
-
     
