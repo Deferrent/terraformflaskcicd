@@ -23,3 +23,17 @@ tags = {
     Name = var.ec2_name
   }
 }
+
+resource "aws_s3_bucket" "b" {
+  bucket = "my-tf-test-bucket"
+
+  tags = {
+    Name        = var.s3_name
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.b.id
+  acl    = "public"
+}
