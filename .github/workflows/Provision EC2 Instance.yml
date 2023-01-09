@@ -30,10 +30,19 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - name: Terraform Create EC2
+      - name: Terraform Create S3
         id:   apply
         env:
           TF_VAR_s3_name:  "${{ github.event.inputs.s3-name }}"
+        run: |
+          cd .
+          terraform init
+          terraform validate
+          terraform plan 
+          terraform apply -auto-approve
+      - name: Terraform Create EC2
+        id:   apply
+        env:
           TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
         run: |
           cd .
