@@ -20,6 +20,6 @@ resource "aws_instance" "app_server" {
   instance_type = "t3.micro"
   key_name      = "app-ssh-key"
 tags = {
-    Name = "EC2 Bucket"
+    Name = "${var.ec2_name}"
   }
 }

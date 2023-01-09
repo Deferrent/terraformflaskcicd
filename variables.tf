@@ -1,4 +1,5 @@
 variable "ec2_name" {
+  default = "Terraform Flask Server"
   type = string
 }
 
