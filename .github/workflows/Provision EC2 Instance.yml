@@ -41,7 +41,7 @@ jobs:
           terraform plan 
           terraform apply -auto-approve
       - name: Terraform Create EC2
-        id:   apply
+        id:   apply2
         env:
           TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
         run: |
