@@ -25,10 +25,15 @@ tags = {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "my-tf-test-bucket"
+  bucket = "Terraform Flask Bucket"
 
   tags = {
-    Name = var.s3_name
-
+    Name        = "My bucket"
+    Environment = "Dev"
   }
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.b.id
+  acl    = "private"
 }
