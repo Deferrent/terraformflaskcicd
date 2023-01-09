@@ -4,6 +4,6 @@ variable "ec2_name" {
 }
 
 variable "s3_name" {
-  default = "Terraform Flask Bucket - Joseph Sam"
+  default = "terraform-flask-bucket-jsam"
   type = string
 }
