@@ -23,17 +23,3 @@ tags = {
     Name = var.ec2_name
   }
 }
-
-resource "aws_s3_bucket" "b" {
-  bucket = "terraform-flask-bucket"
-
-  tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
-  }
-}
-
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.b.id
-  acl    = "private"
-} 
