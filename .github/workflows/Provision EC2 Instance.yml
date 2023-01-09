@@ -10,7 +10,7 @@ on:
       s3-name:
         description: S3 name
         required: true
-        default: 'Terraform Flask App'
+        default: 'terraform-flask-app'
         type: string
 jobs:
   provision-ec2:
