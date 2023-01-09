@@ -26,7 +26,6 @@ tags = {
 
 resource "aws_s3_bucket" "b" {
   bucket = "my-tf-test-bucket"
-  key_name = "app-ssh-key"
 
   tags = {
     Name = var.s3_name
