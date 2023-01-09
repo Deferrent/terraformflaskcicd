@@ -25,7 +25,7 @@ tags = {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "Terraform Flask Bucket"
+  bucket = "terraform-flask-bucket"
 
   tags = {
     Name        = "My bucket"
@@ -36,4 +36,4 @@ resource "aws_s3_bucket" "b" {
 resource "aws_s3_bucket_acl" "example" {
   bucket = aws_s3_bucket.b.id
   acl    = "private"
-}
+} 
