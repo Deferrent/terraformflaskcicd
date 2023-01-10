@@ -1,15 +1,10 @@
-# name: Upload to S3
+# - name: Configure AWS credentials from Test account
+#   uses: aws-actions/configure-aws-credentials@v1
+#   with:
+#      aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
+#      aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
+#      aws-region: us-west-1
 
-# on: push
-
-# jobs:
-#   upload:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@master
-#       - uses: shallwefootball/s3-upload-action@master
-#         with:
-#           aws_key_id: '${{ secrets.TF_USER_AWS_KEY }}'
-#           aws_secret_access_key: '${{ secrets.TF_USER_AWS_SECRET }}'
-#           aws_bucket: ${{ secrets.AWS_BUCKET }}
-#           source_dir: ../../flaskweb.py
+#  - name: Copy files to the test website with the AWS CLI
+#    run: |
+#      aws s3 sync . s3://my-s3-test-website-bucket
