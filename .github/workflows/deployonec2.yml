@@ -3,8 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       start-workflow:
-        description: EC2 name
-        required: flase
+        required: false
 
 jobs:
   deploy:
