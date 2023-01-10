@@ -1,8 +1,10 @@
 # Trigger deployment only on push to master branch
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      start-workflow:
+        description: EC2 name
+        required: flase
 
 jobs:
   deploy:
