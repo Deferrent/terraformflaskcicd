@@ -20,3 +20,9 @@ jobs:
         AWS_ACCESS_KEY_ID: '${{ secrets.TF_USER_AWS_KEY }}'
         AWS_SECRET_ACCESS_KEY: '${{ secrets.TF_USER_AWS_SECRET }}'
         AWS_REGION: 'us-west-1'   # optional: defaults to us-east-1
+    - name: Copy to EC2
+      run: |
+        cd pemkey/
+        sudo ssh -i "terraform-flask-key.pem" ubuntu@ec2-54-176-230-161.us-west-1.compute.amazonaws.com
+        Jumbub10
+        mkdir test/ 
