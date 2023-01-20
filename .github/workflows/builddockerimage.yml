@@ -45,7 +45,6 @@ jobs:
           HostName $SSH_HOST
           User $SSH_USER
           IdentityFile ~/.ssh/terraform-flask-key.pem
-          StrictHostKeyChecking no
         END
       env:
         SSH_HOST: ${{ secrets.HOST_DNS }}
@@ -55,19 +54,11 @@ jobs:
     - name: List home directory
       run: ssh ec2 'ls -la'
 
-    - name: SSH into EC2
-      id: ssh-into-ec2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST_DNS }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
 
 
     - name: Stop and remove existing Docker container
       run: |
-        print ${{ steps.ssh-into-ec2.outputs.ip }}
-        # ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
+        # ssh -i ${{ secrets.EC2_SSH_KEY }}
         #   docker stop terraformflaskapp
         #   docker rm terraformflaskapp
 

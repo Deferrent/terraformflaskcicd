@@ -1,4 +1,4 @@
-name: Provision EC2 and S3
+name: Provision EC2
 on:
   workflow_dispatch:
     inputs:
@@ -6,11 +6,6 @@ on:
         description: EC2 name
         required: true
         default: 'Terraform Flask App'
-        type: string
-      s3-name:
-        description: S3 name
-        required: true
-        default: 'terraform-flask-app'
         type: string
 jobs:
   provision-ec2:
@@ -30,18 +25,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - name: Terraform Create S3
-        id:   apply
-        env:
-          TF_VAR_s3_name:  "${{ github.event.inputs.s3-name }}"
-        run: |
-          cd TerraformFiles/
-          terraform init
-          terraform validate
-          terraform plan 
-          terraform apply -auto-approve
+
       - name: Terraform Create EC2
-        id:   apply2
+        id:   apply
         env:
           TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
         run: |
