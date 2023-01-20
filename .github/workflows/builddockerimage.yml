@@ -52,7 +52,6 @@ jobs:
         SSH_KEY: ${{ secrets.TERRAFORM_SSH_KEY }} 
     
     - name: Start the server
-        if: ${{ always() }}
         run: ssh terraform 'sudo systemctl start my-application'
 
 
