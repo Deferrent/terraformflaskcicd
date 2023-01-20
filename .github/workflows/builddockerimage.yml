@@ -47,9 +47,9 @@ jobs:
           IdentityFile ~/.ssh/terraform.key
         END
       env:
-        SSH_HOST: ${{ secrets.TERRAFORM_SSH_HOST }}
-        SSH_USER: ${{ secrets.TERRAFORM_SSH_USER }}
-        SSH_KEY: ${{ secrets.TERRAFORM_SSH_KEY }} 
+        SSH_HOST: ${{ secrets.EC2_SSH_HOST }}
+        SSH_USER: ${{ secrets.EC2_SSH_USER }}
+        SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
     
     - name: Start the server
       if: ${{ always() }}
