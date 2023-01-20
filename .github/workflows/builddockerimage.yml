@@ -53,7 +53,7 @@ jobs:
     
     - name: Start the server
       if: ${{ always() }}
-      run: ssh terraform 'sudo systemctl start my-application'
+      run: ssh ec2 'sudo systemctl start my-application'
 
 
 
