@@ -32,6 +32,25 @@ jobs:
         push: true
         tags: jsamm21/terraformflaskapp:${{ github.sha }}
 
+    - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/github-actions-key
+          chmod 600 ~/.ssh/github-actions-key
+          cat >>~/.ssh/config <<END
+          Host ec2
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github-actions-key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_HOST: ${{ secrets.HOST_DNS }}
+          SSH_USER: ${{ secrets.USERNAME }}
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
+      - name: List home directory
+        run: ssh ec2 'ls -la'
+
     - name: Deploy to EC2
       run: |
         ssh -i ${{ secrets.EC2_SSH_KEY }} ubuntu@ec2-54-176-230-161.us-west-1.compute.amazonaws.com "docker pull jsamm21/terraformflaskapp:${{ github.sha }} && \
