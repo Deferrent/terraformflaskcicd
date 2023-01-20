@@ -66,12 +66,13 @@ jobs:
 
     - name: Stop and remove existing Docker container
       run: |
-        ssh -i ${{ steps.ssh-into-ec2.outputs.ip }}
-          docker stop terraformflaskapp
-          docker rm terraformflaskapp
+        print ${{ steps.ssh-into-ec2.outputs.ip }}
+        # ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
+        #   docker stop terraformflaskapp
+        #   docker rm terraformflaskapp
 
 
     - name: Start new Docker container
       run: |
-        ssh -i ${{ steps.ssh-into-ec2.outputs.ip }}
+        ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
           docker run -d --name terraformflaskapp -p 80:5000 jsamm21/terraformflaskapp:${{ env.SHA }}
