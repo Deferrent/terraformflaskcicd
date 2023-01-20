@@ -64,10 +64,16 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
 
 
-    - name: Deploy to EC2
+    - name: Stop and remove existing Docker container
       run: |
-        docker stop terraformflaskapp && \
-        docker rm terraformflaskapp && \
-        docker run -d --name terraformflaskapp -p 80:80 jsamm21/terraformflaskapp:${{ github.sha }}"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        ssh ${{ steps.ssh-into-ec2.outputs.ip }} -tt <<EOF
+          docker stop terraformflaskapp
+          docker rm terraformflaskapp
+        EOF
+
+
+    - name: Start new Docker container
+      run: |
+        ssh ${{ steps.ssh-into-ec2.outputs.ip }} -tt <<EOF
+          docker run -d --name terraformflaskapp -p 80:5000 jsamm21/terraformflaskapp:${{ env.SHA }}
+        EOF
