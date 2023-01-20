@@ -62,3 +62,12 @@ jobs:
         host: ${{ secrets.HOST_DNS }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
+
+
+    - name: Deploy to EC2
+      run: |
+        docker stop terraformflaskapp && \
+        docker rm terraformflaskapp && \
+        docker run -d --name terraformflaskapp -p 80:80 jsamm21/terraformflaskapp:${{ github.sha }}"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
