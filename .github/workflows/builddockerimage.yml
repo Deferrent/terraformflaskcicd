@@ -38,13 +38,13 @@ jobs:
     - name: Configure SSH
       run: |
         mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/terraform-flask-key
-        chmod 600 ~/.ssh/terraform-flask-key
+        echo "$SSH_KEY" > ~/.ssh/terraform-flask-key.pem
+        chmod 600 ~/.ssh/terraform-flask-key.pem
         cat >>~/.ssh/config <<END
         Host ec2
           HostName $SSH_HOST
           User $SSH_USER
-          IdentityFile ~/.ssh/terraform-flask-key
+          IdentityFile ~/.ssh/terraform-flask-key.pem
           StrictHostKeyChecking no
         END
       env:
