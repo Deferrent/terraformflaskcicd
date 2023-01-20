@@ -50,20 +50,20 @@ jobs:
         SSH_HOST: ${{ secrets.HOST_DNS }}
         SSH_USER: ${{ secrets.USERNAME }}
         SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
-
+    
     - name: List home directory
       run: ssh ec2 'ls -la'
 
 
 
-    - name: Stop and remove existing Docker container
-      run: |
-        # ssh -i ${{ secrets.EC2_SSH_KEY }}
-        #   docker stop terraformflaskapp
-        #   docker rm terraformflaskapp
+    # - name: Stop and remove existing Docker container
+    #   run: |
+    #     # ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
+    #     #   docker stop terraformflaskapp
+    #     #   docker rm terraformflaskapp
 
 
-    - name: Start new Docker container
-      run: |
-        ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
-          docker run -d --name terraformflaskapp -p 80:5000 jsamm21/terraformflaskapp:${{ env.SHA }}
+    # - name: Start new Docker container
+    #   run: |
+    #     ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ steps.ssh-into-ec2.outputs.ip }}
+    #       docker run -d --name terraformflaskapp -p 80:5000 jsamm21/terraformflaskapp:${{ env.SHA }}
