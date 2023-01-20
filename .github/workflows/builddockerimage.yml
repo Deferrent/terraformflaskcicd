@@ -51,8 +51,9 @@ jobs:
         SSH_USER: ${{ secrets.TERRAFORM_SSH_USER }}
         SSH_KEY: ${{ secrets.TERRAFORM_SSH_KEY }} 
     
-    - name: List home directory
-      run: ssh ec2 'ls -la'
+    - name: Start the server
+        if: ${{ always() }}
+        run: ssh terraform 'sudo systemctl start my-application'
 
 
 
