@@ -32,6 +32,9 @@ jobs:
         push: true
         tags: jsamm21/terraformflaskapp:${{ github.sha }}
 
+    - name: Git clone the repository
+      uses: actions/checkout@v3
+
     - name: Configure SSH
       run: |
         mkdir -p ~/.ssh/
@@ -49,8 +52,8 @@ jobs:
         SSH_USER: ${{ secrets.USERNAME }}
         SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
 
-      - name: List home directory
-        run: ssh ec2 'ls -la'
+    - name: List home directory
+      run: ssh ec2 'ls -la'
 
     - name: Deploy to EC2
       run: |
