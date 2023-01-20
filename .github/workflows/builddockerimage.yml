@@ -44,7 +44,7 @@ jobs:
         Host ec2
           HostName $SSH_HOST
           User $SSH_USER
-          IdentityFile ~/.ssh/terraform-flask-key.pem
+          IdentityFile ~/.ssh/mykey
         END
       env:
         SSH_HOST: ${{ secrets.HOST_DNS }}
