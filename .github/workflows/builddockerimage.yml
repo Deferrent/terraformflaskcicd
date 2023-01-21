@@ -39,6 +39,7 @@ jobs:
       run: |
         mkdir -p ~/.ssh/
         cp pemkey/terraform-flask-key.pem ~/.ssh/
+        chmod 600 ~/.ssh/terraform-flask-key.pem
         echo "$SSH_KEY" > ~/.ssh/ec2.key
         chmod 600 ~/.ssh/ec2.key
         cat >>~/.ssh/config <<END
