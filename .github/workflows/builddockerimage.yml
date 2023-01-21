@@ -38,22 +38,25 @@ jobs:
     - name: Configure SSH
       run: |
         mkdir -p ~/.ssh/
+        cp pemkey/terraform-flask-key.pem ~/.ssh/
         echo "$SSH_KEY" > ~/.ssh/ec2.key
         chmod 600 ~/.ssh/ec2.key
         cat >>~/.ssh/config <<END
         Host ec2
-          HostName $SSH_HOST
-          User $SSH_USER
-          IdentityFile ~/.ssh/ec2.key
+          HostName ec2-54-176-230-161.us-west-1.compute.amazonaws.com
+          User ubuntu
+          IdentityFile ~/.ssh/terraform-flask-key.pem
+          StrictHostKeyChecking no
         END
       env:
-        SSH_HOST: ${{ secrets.EC2_SSH_HOST }}
         SSH_USER: ${{ secrets.EC2_SSH_USER }}
-        SSH_KEY: ${{ secrets.EC2_SSH_KEY }} 
-    
+        SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        SSH_HOST: ${{ secrets.EC2_SSH_HOST }}
+         
     - name: Start the server
-      if: ${{ always() }}
-      run: ssh ec2 'sudo systemctl start my-application'
+      run: | 
+        ssh ec2
+        exit
 
 
 
