@@ -1,12 +1,5 @@
-name: Provision EC2
-on:
-  workflow_dispatch:
-    inputs:
-      ec2-name:
-        description: EC2 name
-        required: true
-        default: 'Terraform Flask App'
-        type: string
+name: Provision Beanstalk
+on: [push]
 jobs:
   provision-ec2:
     runs-on: ubuntu-latest
@@ -15,18 +8,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - name: Configure AWS EC2 credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
-          aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
-          aws-region: us-west-1
+      # - name: Configure AWS EC2 credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
+      #     aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
+      #     aws-region: us-west-1
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
 
-      - name: Terraform Create EC2
+      - name: Terraform Create ELB
         id:   apply
         env:
           TF_VAR_ec2_name:  "${{ github.event.inputs.ec2-name }}"
