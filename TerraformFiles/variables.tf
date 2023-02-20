@@ -12,12 +12,9 @@ variable "tier" {
 }
  
 variable "vpc_id" {
-  default = "vpc-XXXXXXXXX"
+  default = "vpc-2f09a348"
 }
 
 variable "public_subnets" {
-  default = ["subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"]
-}
-variable "elb_public_subnets" {
-  default = ["subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"]
+  default = ["subnet-091f546a60cdf204f", "subnet-0af22fcd735aea012"]
 }
