@@ -11,6 +11,13 @@ variable "tier" {
   default = "WebServer"
 }
  
-variable "vpc_id" {}
-variable "public_subnets" {}
-variable "elb_public_subnets" {}
+variable "vpc_id" {
+  default = "vpc-XXXXXXXXX"
+}
+
+variable "public_subnets" {
+  "subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"
+}
+variable "elb_public_subnets" {
+  "subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"
+}
