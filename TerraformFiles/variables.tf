@@ -5,10 +5,10 @@ variable "beanstalkappenv" {
   default = "terraformflaskenv"
 }
 variable "solution_stack_name" {
-  type = string
+  default = "64bit Amazon Linux 2 v3.2.0 running Python 3.8"
 }
 variable "tier" {
-  type = string
+  default = "WebServer"
 }
  
 variable "vpc_id" {}
