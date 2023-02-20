@@ -16,8 +16,8 @@ variable "vpc_id" {
 }
 
 variable "public_subnets" {
-  "subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"
+  default = ["subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"]
 }
 variable "elb_public_subnets" {
-  "subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"
+  default = ["subnet-XXXXXXXXXX", "subnet-XXXXXXXXX"]
 }
